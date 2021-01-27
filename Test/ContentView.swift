@@ -11,9 +11,9 @@ import CoreData
 struct ContentView: View {
     let arrays: [String] = ["one", "two", "three"];
     var body : some View {
-        VStack {
-            ForEach(arrays, id: \.self) { array in
-                Text("Hello " + array)
+        VStack(alignment: .trailing, spacing: 10) {
+            ForEach(arrays, id: \.self) {
+                array in Text("Hello " + array)
             }
         }.background(Color.red)
     }
