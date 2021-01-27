@@ -9,13 +9,14 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    private let arrays: [String] = ["one", "two", "three"];
+    private var arrays: [String] = ["one", "two", "three"];
     private var rows: [Int] = [1, 2, 3, 4, 5, 6, 7];
     private var B: Color = .blue;
     private var screenWidth = UIScreen.main.bounds.width;
     private var screenHeight = UIScreen.main.bounds.height;
+    
     var body : some View {
-        VStack (alignment: .leading, spacing: 10) {
+        VStack (spacing: 10) {
             ForEach(rows, id: \.self) {
                 row in HStack(alignment: .top, spacing: 40) {
                     ForEach(arrays, id: \.self) {
@@ -23,7 +24,7 @@ struct ContentView: View {
                     }
                 }
             }
-        }.frame(width: screenWidth, height: screenHeight, alignment: .center)
+        }.frame(width: screenWidth, height: screenHeight, alignment: .top)
         .foregroundColor(B)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
     }
