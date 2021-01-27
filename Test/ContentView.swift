@@ -11,24 +11,12 @@ import CoreData
 struct ContentView: View {
     let arrays: [String] = ["one", "two", "three"];
     var body : some View {
-        VStack(alignment: .trailing, spacing: 10) {
+        VStack(alignment: .center, spacing: 10) {
             ForEach(arrays, id: \.self) {
                 array in Text("Hello " + array)
             }
-        }.background(Color.green)
-        .frame(minWidth: 200, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 200, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .topLeading)
-    }
-}
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }.frame(width: 200, height: 500, alignment: .center)
+        .foregroundColor(.blue)
+        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
     }
 }
