@@ -15,7 +15,8 @@ struct ContentView: View {
             ForEach(arrays, id: \.self) {
                 array in Text("Hello " + array)
             }
-        }.background(Color.red)
+        }.background(Color.green)
+        .frame(minWidth: 200, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 200, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .topLeading)
     }
 }
 
