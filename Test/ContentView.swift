@@ -15,6 +15,7 @@ struct ContentView: View {
     private var B: Color = .blue;
     private var screenWidth = UIScreen.main.bounds.width;
     private var screenHeight = UIScreen.main.bounds.height;
+    @State var showsAlert = false;
     
     var body : some View {
         VStack (spacing: 10) {
@@ -25,15 +26,20 @@ struct ContentView: View {
                     }
                 }
             }
-            Button(action: {print("Button Tapped")}) {
-                Text("Hello World")
-            }.foregroundColor(.green)
-            .background(Color.yellow)
-            .padding(.all)
-            .cornerRadius(16)
-            .frame(width: 160, height: 50, alignment: .center)
+            
+            Button(action: { self.showsAlert.toggle() }) {
+                Text("Show Alert")
+            }.alert(isPresented: self.$showsAlert) {
+                Alert(title: Text("Hello"))
+            }
         }.frame(width: screenWidth, height: screenHeight, alignment: .top)
         .foregroundColor(B)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
     }
 }
+
+//.foregroundColor(.green)
+//.background(Color.yellow)
+//.padding(.all)
+//.cornerRadius(16)
+//.frame(width: 160, height: 50, alignment: .center)
