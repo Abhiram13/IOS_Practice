@@ -14,11 +14,12 @@ func integerRows() -> [Int] {
 
 struct ContentView: View {
     private var arrays: [String] = ["one", "two", "three"];
-    private var rows: [Int] = [1, 2, 3, 4, 5, 6, 7];
+//    private var rows: [Int] = [1, 2, 3, 4, 5, 6, 7];
     private var B: Color = .blue;
     private var screenWidth = UIScreen.main.bounds.width;
     private var screenHeight = UIScreen.main.bounds.height;
     @State var showsAlert = false;
+    @State var username: String = ""
         
     var body : some View {
         VStack (spacing: 10) {
@@ -29,6 +30,13 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            TextField("User name (email address)", text: $username)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .border(Color(UIColor.separator))
+                Text(username)
+                    .foregroundColor(.blue)
                 
             Button(action: { self.showsAlert.toggle() }) {
                 Text("Show Alert")
