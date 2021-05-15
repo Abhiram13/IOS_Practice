@@ -1,8 +1,8 @@
 //
 //  Persistence.swift
-//  Test
+//  Calculator
 //
-//  Created by Abhiram Nagadi on 27/01/21.
+//  Created by Abhiram Nagadi on 15/05/21.
 //
 
 import CoreData
@@ -31,7 +31,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Test")
+        container = NSPersistentContainer(name: "Calculator")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

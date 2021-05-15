@@ -1,13 +1,16 @@
 //
 //  ContentView.swift
-//  Test
+//  Calculator
 //
-//  Created by Abhiram Nagadi on 27/01/21.
+//  Created by Abhiram Nagadi on 15/05/21.
 //
 
 import SwiftUI
 import CoreData
 
+func integerRows() -> [Int] {
+    return [1, 2, 3, 4, 5, 6, 7];
+}
 
 struct ContentView: View {
     private var arrays: [String] = ["one", "two", "three"];
@@ -16,17 +19,17 @@ struct ContentView: View {
     private var screenWidth = UIScreen.main.bounds.width;
     private var screenHeight = UIScreen.main.bounds.height;
     @State var showsAlert = false;
-    
+        
     var body : some View {
         VStack (spacing: 10) {
-            ForEach(rows, id: \.self) {
+            ForEach(integerRows(), id: \.self) {
                 row in HStack(alignment: .top, spacing: 40) {
                     ForEach(arrays, id: \.self) {
                         array in Text("Hello " + array)
                     }
                 }
             }
-            
+                
             Button(action: { self.showsAlert.toggle() }) {
                 Text("Show Alert")
             }.alert(isPresented: self.$showsAlert) {
@@ -38,8 +41,15 @@ struct ContentView: View {
     }
 }
 
-//.foregroundColor(.green)
-//.background(Color.yellow)
-//.padding(.all)
-//.cornerRadius(16)
-//.frame(width: 160, height: 50, alignment: .center)
+//private let itemFormatter: DateFormatter = {
+//    let formatter = DateFormatter()
+//    formatter.dateStyle = .short
+//    formatter.timeStyle = .medium
+//    return formatter
+//}()
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//    }
+//}
