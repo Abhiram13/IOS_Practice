@@ -39,7 +39,6 @@ class TextInput {
 //    }
 }
 
-
 class ViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -98,16 +97,15 @@ class ViewController: UIViewController {
     }
 }
 
-func demo() -> UITextField {
-    let x = UITextField()
-    x.text = "This is just a Text"
+func add(fNum: String, lNum: String) -> Int {
+    let firstNum: Int = Int(fNum) ?? 0;
+    let lastNum: Int = Int(lNum) ?? 0;
     
-    return x;
+    return firstNum + lastNum;
 }
 
 struct ContentView: View {
     private var arrays: [String] = ["one", "two", "three"];
-//    private var rows: [Int] = [1, 2, 3, 4, 5, 6, 7];
     private var B: Color = .blue;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
@@ -142,25 +140,10 @@ struct ContentView: View {
             Text(String(i)).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
 
             Button(action: {
-                let a = Int(fNum) ?? 0;
-                let b = Int(lNum) ?? 0;
-                i = a + b;
+                i = add(fNum: fNum, lNum: lNum)
             }) { Text("Add Sum") }
         }.frame(width: screenWidth, height: screenHeight - 100, alignment: .center)
         .foregroundColor(B)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
     }
 }
-
-//private let itemFormatter: DateFormatter = {
-//    let formatter = DateFormatter()
-//    formatter.dateStyle = .short
-//    formatter.timeStyle = .medium
-//    return formatter
-//}()
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-//    }
-//}
