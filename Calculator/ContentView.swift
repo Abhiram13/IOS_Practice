@@ -116,34 +116,41 @@ struct ContentView: View {
     @State private var i: Int = 0;
 
     var body : some View {
-        VStack (spacing: 10) {
-//            ForEach(integerRows(), id: \.self) {
-//                row in HStack(alignment: .top, spacing: 40) {
-//                    ForEach(arrays, id: \.self) {
-//                        array in Text("Hello " + array)
-//                    }
-//                }
-//            }
+        NavigationView {
+            VStack (spacing: 10) {
+    //            ForEach(integerRows(), id: \.self) {
+    //                row in HStack(alignment: .top, spacing: 40) {
+    //                    ForEach(arrays, id: \.self) {
+    //                        array in Text("Hello " + array)
+    //                    }
+    //                }
+    //            }
 
-            TextField("First Number", text: $fNum)
-                .keyboardType(.namePhonePad)
-                .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
-                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-            
-            TextField("Last Number", text: $lNum)
-                .keyboardType(.namePhonePad)
-                .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
-                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-            
-            Text(String(i)).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                TextField("First Number", text: $fNum)
+                    .keyboardType(.namePhonePad)
+                    .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                
+                TextField("Last Number", text: $lNum)
+                    .keyboardType(.namePhonePad)
+                    .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                
+                Text(String(i)).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
 
-            Button(action: {
-                i = add(fNum: fNum, lNum: lNum)
-            }) { Text("Add Sum") }
-        }.frame(width: screenWidth, height: screenHeight - 100, alignment: .center)
-        .foregroundColor(B)
-        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                Button(action: {
+                    i = add(fNum: fNum, lNum: lNum)
+                }) { Text("Add Sum") }
+                
+                NavigationLink(destination: Detail()) {
+                    Text("Click Me to Navigate").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                }
+                
+            }.frame(width: screenWidth, height: screenHeight - 100, alignment: .center)
+            .foregroundColor(B)
+            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+        }.navigationTitle("Home Page")
     }
 }

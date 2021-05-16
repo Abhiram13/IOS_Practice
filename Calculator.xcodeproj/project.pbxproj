@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8394996626511E9400605A47 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8394996526511E9400605A47 /* Detail.swift */; };
 		8397E8EE265011E200478C1B /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8397E8ED265011E200478C1B /* CalculatorApp.swift */; };
 		8397E8F0265011E200478C1B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8397E8EF265011E200478C1B /* ContentView.swift */; };
 		8397E8F2265011E400478C1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8397E8F1265011E400478C1B /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8394996526511E9400605A47 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		8397E8EA265011E100478C1B /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8397E8ED265011E200478C1B /* CalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorApp.swift; sourceTree = "<group>"; };
 		8397E8EF265011E200478C1B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				8397E8ED265011E200478C1B /* CalculatorApp.swift */,
 				8397E8EF265011E200478C1B /* ContentView.swift */,
+				8394996526511E9400605A47 /* Detail.swift */,
 				8397E8F1265011E400478C1B /* Assets.xcassets */,
 				8397E8F6265011E400478C1B /* Persistence.swift */,
 				8397E8FB265011E400478C1B /* Info.plist */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8397E8F7265011E400478C1B /* Persistence.swift in Sources */,
+				8394996626511E9400605A47 /* Detail.swift in Sources */,
 				8397E8FA265011E400478C1B /* Calculator.xcdatamodeld in Sources */,
 				8397E8F0265011E200478C1B /* ContentView.swift in Sources */,
 				8397E8EE265011E200478C1B /* CalculatorApp.swift in Sources */,
