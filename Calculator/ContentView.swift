@@ -12,6 +12,33 @@ func integerRows() -> [Int] {
     return [1, 2, 3, 4, 5, 6, 7];
 }
 
+class TextInput {
+    var placeHolder: String
+    var dynamicText: Binding<String>
+    var capType: UITextAutocapitalizationType = .allCharacters
+    var autoCorrect: Bool = true
+    var keyType: UIKeyboardType
+    var screenWidth: CGFloat = UIScreen.main.bounds.width
+    
+    init(placeH: String, text: Binding<String>, CapType: UITextAutocapitalizationType, autoC: Bool, kType: UIKeyboardType) {
+        placeHolder = placeH
+        dynamicText = text
+        capType = CapType
+        autoCorrect = autoC
+        keyType = kType
+    }
+    
+//    func renderTextField() {
+//        return TextField(placeHolder, text: dynamicText)
+//            .autocapitalization(capType)
+//            .disableAutocorrection(autoCorrect)
+//            .keyboardType(keyType)
+//            .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+//            .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+//    }
+}
+
 
 class ViewController: UIViewController {
     let scrollView = UIScrollView()
@@ -71,6 +98,13 @@ class ViewController: UIViewController {
     }
 }
 
+func demo() -> UITextField {
+    let x = UITextField()
+    x.text = "This is just a Text"
+    
+    return x;
+}
+
 struct ContentView: View {
     private var arrays: [String] = ["one", "two", "three"];
 //    private var rows: [Int] = [1, 2, 3, 4, 5, 6, 7];
@@ -78,33 +112,41 @@ struct ContentView: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
     @State private var showsAlert: Bool = false;
-    @State private var username: String = "";
+    @State private var result: String = "";
+    @State private var fNum: String = "";
+    @State private var lNum: String = "";
+    @State private var i: Int = 0;
 
     var body : some View {
         VStack (spacing: 10) {
-            ForEach(integerRows(), id: \.self) {
-                row in HStack(alignment: .top, spacing: 40) {
-                    ForEach(arrays, id: \.self) {
-                        array in Text("Hello " + array)
-                    }
-                }
-            }
+//            ForEach(integerRows(), id: \.self) {
+//                row in HStack(alignment: .top, spacing: 40) {
+//                    ForEach(arrays, id: \.self) {
+//                        array in Text("Hello " + array)
+//                    }
+//                }
+//            }
 
-            TextField("First Number", text: $username)
-                .autocapitalization(.allCharacters)
-                .disableAutocorrection(true)
+            TextField("First Number", text: $fNum)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+            
+            TextField("Last Number", text: $lNum)
+                .keyboardType(.namePhonePad)
+                .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+            
+            Text(String(i)).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
 
-            Text(username).foregroundColor(.blue)
-
-            Button(action: { self.showsAlert.toggle() }) { Text("Show Alert") }
-                .alert(isPresented: self.$showsAlert) {
-                Alert(title: Text("Hello"))
-            }
-        }.frame(width: screenWidth, height: screenHeight, alignment: .top)
+            Button(action: {
+                let a = Int(fNum) ?? 0;
+                let b = Int(lNum) ?? 0;
+                i = a + b;
+            }) { Text("Add Sum") }
+        }.frame(width: screenWidth, height: screenHeight - 100, alignment: .center)
         .foregroundColor(B)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
     }
