@@ -7,11 +7,13 @@
 
 import SwiftUI;
 
-func CalculatePercentage(total: String, percentage: String) -> Int {
+func CalculatePercentage(total: String, percentage: String) -> Double {
     let Total: Int = Int(total) ?? 0
     let Percentage: Int = Int(percentage) ?? 0
+    let x = Double(Total)/100
+    let val = x * Double(Percentage)
     
-    return (Total/100 * Percentage);
+    return val;
 }
 
 struct Detail: View {
