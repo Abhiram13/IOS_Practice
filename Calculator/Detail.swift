@@ -17,12 +17,6 @@ func CalculateValue(total: String, value: String) -> Double {
     return result * 100;
 }
 
-func demoView() -> some View {
-    return VStack(spacing: nil) {
-        Text("This is From Sepertae Function")
-    }
-}
-
 struct PercentageCalcView: View {
     let fNum: Binding<String>;
     let lNum: Binding<String>;
@@ -65,29 +59,29 @@ struct PercentageCalcView: View {
 }
 
 struct ValueToPercentageFormView: View {
-    let fNum: Binding<String>;
-    let lNum: Binding<String>;
+    let Value: Binding<String>;
+    let TotalAmount: Binding<String>;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
     @Binding var showsAlert: Bool;
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
-            Text("Find Value")
+            Text("Find Percentage")
                 .bold()
                 .font(.system(size: 20))
             
-            Text("Find how much value the percentage presents")
+            Text("Find out how much percentage the value covers")
                 .font(.system(size: 15))
             
-            TextField("Total Amount", text: fNum)
+            TextField("Value", text: Value)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
-            TextField("Percentage %", text: lNum)
+            TextField("Total Amount", text: TotalAmount)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
@@ -98,20 +92,9 @@ struct ValueToPercentageFormView: View {
                 Text("Calculate")
             }
             .alert(isPresented: $showsAlert) {
-                Alert(title: Text("\(CalculatePercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
+                Alert(title: Text("\(CalculateValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))"))
             }
         }.frame(width: screenWidth - 45, height: 160, alignment: .top)
-    }
-}
-
-func PercentageCalculatorView() -> some View {
-    return Group {
-        Text("Find Value")
-            .bold()
-            .font(.system(size: 20))
-        
-        Text("Find how much value the percentage presents")
-            .font(.system(size: 15))
     }
 }
 
@@ -125,9 +108,6 @@ struct Detail: View {
     @State private var showsAlert = false;
     @State private var showSecondAlert = false;
     
-    // (Total)/100 * (percentage) --- to find how much value the percentage presents ------ Find Value
-    // (Value)/(Total) * 100 --- to find out how much percentage the value covers ------ Find Percentage
-    
     var body: some View {
         ScrollView {
             Color.white.overlay(
@@ -139,40 +119,7 @@ struct Detail: View {
                             .font(.system(size: 25))
                         
                         PercentageCalcView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
-                        
-//                        Group {
-//                            Text("Find Percentage")
-//                                .bold()
-//                                .font(.system(size: 20))
-//
-//                            Text("Find out how much percentage the value covers")
-//                                .font(.system(size: 15))
-//
-//                            VStack(alignment: .center, spacing: 10) {
-//                                TextField("Value", text: $Value)
-//                                    .keyboardType(.namePhonePad)
-//                                    .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
-//                                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-//                                    .multilineTextAlignment(.center)
-//
-//                                TextField("Total Amount", text: $TotalAmount)
-//                                    .keyboardType(.namePhonePad)
-//                                    .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
-//                                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-//                                    .multilineTextAlignment(.center)
-//
-//                                Button(action: { showSecondAlert.toggle() }) {
-//                                    Text("Calculate")
-//                                }
-//                                .alert(isPresented: $showSecondAlert) {
-//                                    Alert(title: Text("\(CalculateValue(total: TotalAmount, value: Value))"))
-//                                }
-//
-//                            }
-//                            .frame(width: screenWidth - 45, height: 100, alignment: .center)
-//                        }
+                        ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
                         
                     }
 //                    .frame(width: screenWidth - 35, height: screenHeight - 40, alignment: .topLeading)
@@ -182,7 +129,6 @@ struct Detail: View {
                 .border(Color.black, width: 1)
                 .ignoresSafeArea(.keyboard, edges: .all)
             )
-            demoView()
         }
     }
 }
