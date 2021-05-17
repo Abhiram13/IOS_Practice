@@ -1,6 +1,6 @@
 import SwiftUI;
 
-func CalculatePercentage(total: String, percentage: String) -> Double {
+func CalculateValueFromPercentage(total: String, percentage: String) -> Double {
     let Total: Int = Int(total) ?? 0
     let Percentage: Int = Int(percentage) ?? 0
     let x = Double(Total)/100
@@ -9,12 +9,12 @@ func CalculatePercentage(total: String, percentage: String) -> Double {
     return val;
 }
 
-func CalculateValue(total: String, value: String) -> Double {
+func CalculatePercentageFromValue(total: String, value: String) -> Double {
     let Total: Int = Int(total) ?? 0
     let Value: Int = Int(value) ?? 0
-    let result: Double = Double(Value)/Double(Total);
+    let percentage: Double = Double(Value)/Double(Total);
     
-    return result * 100;
+    return percentage * 100;
 }
 
 struct PercentageCalcView: View {
@@ -52,7 +52,7 @@ struct PercentageCalcView: View {
                 Text("Calculate")
             }
             .alert(isPresented: $showsAlert) {
-                Alert(title: Text("\(CalculatePercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
+                Alert(title: Text("\(CalculateValueFromPercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
             }
         }
     }
@@ -92,7 +92,7 @@ struct ValueToPercentageFormView: View {
                 Text("Calculate")
             }
             .alert(isPresented: $showsAlert) {
-                Alert(title: Text("\(CalculateValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))"))
+                Alert(title: Text("\(CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))%"))
             }
         }
     }
@@ -130,9 +130,11 @@ struct Detail: View {
                 
                 PercentageCalcView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
                 ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
-            }.border(Color.red, width: 3)
+                
+            }
         }
         .frame(height: screenHeight)
         .padding(.top, 120)
+        .ignoresSafeArea(.keyboard)
     }
 }
