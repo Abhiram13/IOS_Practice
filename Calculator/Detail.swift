@@ -19,8 +19,9 @@ func CalculatePercentage(total: String, percentage: String) -> Double {
 func CalculateValue(total: String, value: String) -> Double {
     let Total: Int = Int(total) ?? 0
     let Value: Int = Int(value) ?? 0
+    let result: Double = Double(Value)/Double(Total);
     
-    return Double(Value)/Double(Total) * 100;
+    return result * 100;
 }
 
 struct Detail: View {
