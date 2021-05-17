@@ -26,7 +26,7 @@ struct PercentageCalcView: View {
     @Binding var showsAlert: Bool;
     
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        Group {
             Text("Find Value")
                 .bold()
                 .font(.system(size: 20))
@@ -54,7 +54,7 @@ struct PercentageCalcView: View {
             .alert(isPresented: $showsAlert) {
                 Alert(title: Text("\(CalculatePercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
             }
-        }.frame(width: screenWidth - 45, height: 160, alignment: .top)
+        }
     }
 }
 
@@ -66,7 +66,7 @@ struct ValueToPercentageFormView: View {
     @Binding var showsAlert: Bool;
     
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        Group {
             Text("Find Percentage")
                 .bold()
                 .font(.system(size: 20))
@@ -94,7 +94,7 @@ struct ValueToPercentageFormView: View {
             .alert(isPresented: $showsAlert) {
                 Alert(title: Text("\(CalculateValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))"))
             }
-        }.frame(width: screenWidth - 45, height: 160, alignment: .top)
+        }
     }
 }
 
@@ -109,26 +109,30 @@ struct Detail: View {
     @State private var showSecondAlert = false;
     
     var body: some View {
-        ScrollView {
-            Color.white.overlay(
-                VStack(alignment: .leading, spacing: 10) {
-                    VStack (alignment: .leading, spacing: nil) {
-                        Text("Percentage Calculator")
-                            .bold()
-                            .frame(minHeight: 60)
-                            .font(.system(size: 25))
+        ScrollView(.vertical) {
+//            Color.white.overlay(
+//                VStack(alignment: .leading, spacing: 10) {
+//                    VStack (alignment: .leading, spacing: nil) {
                         
-                        PercentageCalcView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
-                        ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
-                        
-                    }
-//                    .frame(width: screenWidth - 35, height: screenHeight - 40, alignment: .topLeading)
+//                    }
+//                    .frame(width: screenWidth - 35, height: screenHeight - 100, alignment: .center)
 //                    .border(Color.green, width: 1)
-                }
-                .frame(width: screenWidth, height: screenHeight)
-                .border(Color.black, width: 1)
-                .ignoresSafeArea(.keyboard, edges: .all)
-            )
+//                }
+//                .frame(width: screenWidth, height: screenHeight, alignment: .top)
+//                .border(Color.black, width: 1)
+//                .ignoresSafeArea(.keyboard, edges: .all)
+//            )
+            VStack(spacing: nil) {
+                Text("Percentage Calculator")
+                    .bold()
+                    .frame(minHeight: 60)
+                    .font(.system(size: 25))
+                
+                PercentageCalcView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
+                ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
+            }.border(Color.red, width: 3)
         }
+        .frame(height: screenHeight)
+        .padding(.top, 120)
     }
 }
