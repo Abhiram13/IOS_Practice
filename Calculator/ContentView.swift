@@ -62,13 +62,6 @@ struct ContentView: View {
     var body : some View {
         NavigationView {
             VStack (spacing: 10) {
-    //            ForEach(integerRows(), id: \.self) {
-    //                row in HStack(alignment: .top, spacing: 40) {
-    //                    ForEach(arrays, id: \.self) {
-    //                        array in Text("Hello " + array)
-    //                    }
-    //                }
-    //            }
 
                 TextField("First Number", text: $fNum)
                     .keyboardType(.namePhonePad)
