@@ -17,16 +17,15 @@ func CalculatePercentageFromValue(total: String, value: String) -> Double {
     return percentage * 100;
 }
 
-struct PercentageCalcView: View {
+struct PercentageToValueView: View {
     let fNum: Binding<String>;
     let lNum: Binding<String>;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
-    private let screenHeight: CGFloat = UIScreen.main.bounds.height;
-    
+    private let screenHeight: CGFloat = UIScreen.main.bounds.height;    
     @Binding var showsAlert: Bool;
     
     var body: some View {
-        Group {
+        VStack(alignment: .leading, spacing: nil) {
             Text("Find Value")
                 .bold()
                 .font(.system(size: 20))
@@ -55,6 +54,7 @@ struct PercentageCalcView: View {
                 Alert(title: Text("\(CalculateValueFromPercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
             }
         }
+        .frame(minHeight: 200)
     }
 }
 
@@ -66,13 +66,15 @@ struct ValueToPercentageFormView: View {
     @Binding var showsAlert: Bool;
     
     var body: some View {
-        Group {
+        VStack(spacing: nil) {
             Text("Find Percentage")
                 .bold()
                 .font(.system(size: 20))
+                .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find out how much percentage the value covers")
                 .font(.system(size: 15))
+                .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Value", text: Value)
                 .keyboardType(.namePhonePad)
@@ -110,25 +112,13 @@ struct Detail: View {
     
     var body: some View {
         ScrollView(.vertical) {
-//            Color.white.overlay(
-//                VStack(alignment: .leading, spacing: 10) {
-//                    VStack (alignment: .leading, spacing: nil) {
-                        
-//                    }
-//                    .frame(width: screenWidth - 35, height: screenHeight - 100, alignment: .center)
-//                    .border(Color.green, width: 1)
-//                }
-//                .frame(width: screenWidth, height: screenHeight, alignment: .top)
-//                .border(Color.black, width: 1)
-//                .ignoresSafeArea(.keyboard, edges: .all)
-//            )
-            VStack(spacing: nil) {
+            VStack(alignment: .leading, spacing: nil) {
                 Text("Percentage Calculator")
                     .bold()
                     .frame(minHeight: 60)
                     .font(.system(size: 25))
                 
-                PercentageCalcView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
+                PercentageToValueView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
                 ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
                 
             }
