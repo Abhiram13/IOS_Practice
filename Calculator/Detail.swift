@@ -17,14 +17,6 @@ func CalculatePercentageFromValue(total: String, value: String) -> Float {
     return percentage * 100;
 }
 
-//struct SearchBar: UIViewRepresentable {
-//    func makeUIView(context: Context) -> UISearchBar {
-//        return UISearchBar()
-//    }
-//
-//    func updateUIView(_ uiView: UISearchBar, context: Context) {}
-//}
-
 struct Buton<AlertType>: View {
     let ButtonName: String;
     let val: AlertType;
@@ -51,11 +43,15 @@ struct Buton<AlertType>: View {
 }
 
 struct PercentageToValueView: View {
-    private let screenWidth: CGFloat = UIScreen.main.bounds.width;
-    private let screenHeight: CGFloat = UIScreen.main.bounds.height;    
     @State private var showsAlert: Bool = false;
     @State private var Total: String = "";
     @State private var Percentage: String = "";
+    var screenWidth, screenHeight: CGFloat;
+    
+    init(Width: CGFloat, Height: CGFloat) {
+        self.screenWidth = Width;
+        self.screenHeight = Height;
+    }
     
     var body: some View {
         VStack(spacing: nil) {
@@ -93,11 +89,15 @@ struct PercentageToValueView: View {
 }
 
 struct ValueToPercentageFormView: View {
-    private let screenWidth: CGFloat = UIScreen.main.bounds.width;
-    private let screenHeight: CGFloat = UIScreen.main.bounds.height;
     @State private var showsAlert: Bool = false;
     @State private var Value: String = "";
     @State private var TotalAmount: String = "";
+    var screenWidth, screenHeight: CGFloat;
+    
+    init(Width: CGFloat, Height: CGFloat) {
+        self.screenWidth = Width;
+        self.screenHeight = Height;
+    }
     
     var body: some View {
         VStack(spacing: nil) {
@@ -133,12 +133,23 @@ struct ValueToPercentageFormView: View {
     }
 }
 
+struct PercentageCalculator: View {
+    var width, height: CGFloat;
+    
+    init(Width: CGFloat, Height: CGFloat) {
+        self.width = Width;
+        self.height = Height;
+    }
+    
+    var body: some View {
+        PercentageToValueView(Width: width, Height: height);
+        ValueToPercentageFormView(Width: width, Height: height);
+    }
+}
+
 struct Detail: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
-    @State private var Value: String = "";
-    @State private var TotalAmount: String = "";
-    @State private var showSecondAlert = false;
     
     var body: some View {
         ScrollView(.vertical) {
@@ -148,8 +159,7 @@ struct Detail: View {
                     .frame(minHeight: 60)
                     .font(.system(size: 25))
                 
-                PercentageToValueView();
-                ValueToPercentageFormView();
+                PercentageCalculator(Width: screenWidth, Height: screenHeight);
             }
         }
         .frame(height: screenHeight)
