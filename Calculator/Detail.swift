@@ -9,10 +9,10 @@ func CalculateValueFromPercentage(total: String, percentage: String) -> Double {
     return val;
 }
 
-func CalculatePercentageFromValue(total: String, value: String) -> Double {
+func CalculatePercentageFromValue(total: String, value: String) -> Float {
     let Total: Int = Int(total) ?? 0
     let Value: Int = Int(value) ?? 0
-    let percentage: Double = Double(Value)/Double(Total);
+    let percentage: Float = Float(Value)/Float(Total);
     
     return percentage * 100;
 }
@@ -82,7 +82,7 @@ struct PercentageToValueView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
-            Buton(
+            Buton<Double>(
                 ButtonName: "Calculate",
                 val: CalculateValueFromPercentage(total: Total.wrappedValue, percentage: Percentage.wrappedValue),
                 showsAlert: $showsAlert
@@ -124,9 +124,9 @@ struct ValueToPercentageFormView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
-            Buton(
+            Buton<String>(
                 ButtonName: "Calculate",
-                val: CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue),
+                val: "\(CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))%",
                 showsAlert: $showsAlert
             )
         }
@@ -153,7 +153,6 @@ struct Detail: View {
                 
                 PercentageToValueView(Total: $fNum, Percentage: $lNum, showsAlert: $showsAlert)
                 ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
-                
             }
         }
         .frame(height: screenHeight)
