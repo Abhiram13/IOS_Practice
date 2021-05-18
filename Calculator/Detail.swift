@@ -17,9 +17,42 @@ func CalculatePercentageFromValue(total: String, value: String) -> Double {
     return percentage * 100;
 }
 
+//struct SearchBar: UIViewRepresentable {
+//    func makeUIView(context: Context) -> UISearchBar {
+//        return UISearchBar()
+//    }
+//
+//    func updateUIView(_ uiView: UISearchBar, context: Context) {}
+//}
+
+struct Buton<AlertType>: View {
+    let ButtonName: String;
+    let val: AlertType;
+    @Binding var showsAlert: Bool;
+    
+    init(ButtonName: String, val: AlertType, showsAlert: Binding<Bool>) {
+        self.ButtonName = ButtonName;
+        self.val = val;
+        self._showsAlert = showsAlert;
+    }
+    
+    var body: some View {
+        Button(action: { self.showsAlert.toggle() }) {
+            Text(ButtonName)
+                .foregroundColor(.white)
+                .frame(width: 100, height: 35)
+        }
+        .background(Color.blue)
+        .cornerRadius(8.0)
+        .alert(isPresented: $showsAlert) {
+            Alert(title: Text("\(self.val)" as String))
+        }
+    }
+}
+
 struct PercentageToValueView: View {
-    let fNum: Binding<String>;
-    let lNum: Binding<String>;
+    let Total: Binding<String>;
+    let Percentage: Binding<String>;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;    
     @Binding var showsAlert: Bool;
@@ -35,30 +68,25 @@ struct PercentageToValueView: View {
                 .font(.system(size: 15))
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
-            TextField("Total Amount", text: fNum)
+            TextField("Total Amount", text: Total)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
-            TextField("Percentage %", text: lNum)
+            TextField("Percentage %", text: Percentage)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
-            Button(action: { self.showsAlert.toggle() }) {
-                Text("Calculate")
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 35)
-            }
-            .background(Color.blue)
-            .cornerRadius(8.0)
-            .alert(isPresented: $showsAlert) {
-                Alert(title: Text("\(CalculateValueFromPercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
-            }
+            Buton(
+                ButtonName: "Calculate",
+                val: CalculateValueFromPercentage(total: Total.wrappedValue, percentage: Percentage.wrappedValue),
+                showsAlert: $showsAlert
+            )
         }
         .frame(minHeight: 260)
     }
@@ -96,16 +124,11 @@ struct ValueToPercentageFormView: View {
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
-            Button(action: { self.showsAlert.toggle() }) {
-                Text("Calculate")
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 35)
-            }
-            .background(Color.blue)
-            .cornerRadius(8.0)
-            .alert(isPresented: $showsAlert) {
-                Alert(title: Text("\(CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))%"))
-            }
+            Buton(
+                ButtonName: "Calculate",
+                val: CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue),
+                showsAlert: $showsAlert
+            )
         }
     }
 }
@@ -128,7 +151,7 @@ struct Detail: View {
                     .frame(minHeight: 60)
                     .font(.system(size: 25))
                 
-                PercentageToValueView(fNum: $fNum, lNum: $lNum, showsAlert: $showsAlert)
+                PercentageToValueView(Total: $fNum, Percentage: $lNum, showsAlert: $showsAlert)
                 ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
                 
             }
