@@ -25,13 +25,15 @@ struct PercentageToValueView: View {
     @Binding var showsAlert: Bool;
     
     var body: some View {
-        VStack(alignment: .leading, spacing: nil) {
+        VStack(spacing: nil) {
             Text("Find Value")
                 .bold()
                 .font(.system(size: 20))
+                .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find how much value the percentage presents")
                 .font(.system(size: 15))
+                .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Total Amount", text: fNum)
                 .keyboardType(.namePhonePad)
@@ -49,12 +51,16 @@ struct PercentageToValueView: View {
             
             Button(action: { self.showsAlert.toggle() }) {
                 Text("Calculate")
+                    .foregroundColor(.white)
+                    .frame(width: 100, height: 35)
             }
+            .background(Color.blue)
+            .cornerRadius(8.0)
             .alert(isPresented: $showsAlert) {
                 Alert(title: Text("\(CalculateValueFromPercentage(total: fNum.wrappedValue, percentage: lNum.wrappedValue))"))
             }
         }
-        .frame(minHeight: 200)
+        .frame(minHeight: 260)
     }
 }
 
@@ -92,7 +98,11 @@ struct ValueToPercentageFormView: View {
             
             Button(action: { self.showsAlert.toggle() }) {
                 Text("Calculate")
+                    .foregroundColor(.white)
+                    .frame(width: 100, height: 35)
             }
+            .background(Color.blue)
+            .cornerRadius(8.0)
             .alert(isPresented: $showsAlert) {
                 Alert(title: Text("\(CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))%"))
             }
