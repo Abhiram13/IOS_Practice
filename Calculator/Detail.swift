@@ -51,11 +51,11 @@ struct Buton<AlertType>: View {
 }
 
 struct PercentageToValueView: View {
-    let Total: Binding<String>;
-    let Percentage: Binding<String>;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;    
-    @Binding var showsAlert: Bool;
+    @State private var showsAlert: Bool = false;
+    @State private var Total: String = "";
+    @State private var Percentage: String = "";
     
     var body: some View {
         VStack(spacing: nil) {
@@ -68,14 +68,14 @@ struct PercentageToValueView: View {
                 .font(.system(size: 15))
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
-            TextField("Total Amount", text: Total)
+            TextField("Total Amount", text: $Total)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
-            TextField("Percentage %", text: Percentage)
+            TextField("Percentage %", text: $Percentage)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
@@ -84,7 +84,7 @@ struct PercentageToValueView: View {
             
             Buton<Double>(
                 ButtonName: "Calculate",
-                val: CalculateValueFromPercentage(total: Total.wrappedValue, percentage: Percentage.wrappedValue),
+                val: CalculateValueFromPercentage(total: $Total.wrappedValue, percentage: $Percentage.wrappedValue),
                 showsAlert: $showsAlert
             )
         }
@@ -93,11 +93,11 @@ struct PercentageToValueView: View {
 }
 
 struct ValueToPercentageFormView: View {
-    let Value: Binding<String>;
-    let TotalAmount: Binding<String>;
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
-    @Binding var showsAlert: Bool;
+    @State private var showsAlert: Bool = false;
+    @State private var Value: String = "";
+    @State private var TotalAmount: String = "";
     
     var body: some View {
         VStack(spacing: nil) {
@@ -110,15 +110,15 @@ struct ValueToPercentageFormView: View {
                 .font(.system(size: 15))
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
-            TextField("Value", text: Value)
+            TextField("Value", text: $Value)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
-            TextField("Total Amount", text: TotalAmount)
-                .keyboardType(.namePhonePad)
+            TextField("Total Amount", text: $TotalAmount)
+                .keyboardType(.asciiCapableNumberPad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
@@ -126,7 +126,7 @@ struct ValueToPercentageFormView: View {
             
             Buton<String>(
                 ButtonName: "Calculate",
-                val: "\(CalculatePercentageFromValue(total: TotalAmount.wrappedValue, value: Value.wrappedValue))%",
+                val: "\(CalculatePercentageFromValue(total: $TotalAmount.wrappedValue, value: $Value.wrappedValue))%",
                 showsAlert: $showsAlert
             )
         }
@@ -136,11 +136,8 @@ struct ValueToPercentageFormView: View {
 struct Detail: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width;
     private let screenHeight: CGFloat = UIScreen.main.bounds.height;
-    @State private var fNum: String = "";
-    @State private var lNum: String = "";
     @State private var Value: String = "";
     @State private var TotalAmount: String = "";
-    @State private var showsAlert = false;
     @State private var showSecondAlert = false;
     
     var body: some View {
@@ -151,8 +148,8 @@ struct Detail: View {
                     .frame(minHeight: 60)
                     .font(.system(size: 25))
                 
-                PercentageToValueView(Total: $fNum, Percentage: $lNum, showsAlert: $showsAlert)
-                ValueToPercentageFormView(Value: $Value, TotalAmount: $TotalAmount, showsAlert: $showSecondAlert)
+                PercentageToValueView();
+                ValueToPercentageFormView();
             }
         }
         .frame(height: screenHeight)
