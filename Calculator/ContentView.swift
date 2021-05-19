@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreData
 
-public class Links {
+struct Links {
     var title: String;
     var component: AnyView;
     
@@ -12,17 +12,21 @@ public class Links {
 }
 
 struct ContentView: View {
-    private var x: [Links] = [Links(Title: "Pecentage Calculator", Component: AnyView(Detail()))]
+    let links: [Links] = [
+            Links(Title: "Pecentage Calculator", Component: AnyView(Detail())),
+            Links(Title: "Second Page", Component: AnyView(SecondPage()))
+        ];
     
     var body : some View {
         NavigationView {
             VStack (alignment: .leading, spacing: 10) {
-//                for link in x {
-//                    NavigationLink(destination: Detail()) {
-//                        Text("Pecentage Calculator").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-//                    }
-//                }
-                
+                List {
+                    ForEach(0..<links.count) { index in
+                        NavigationLink(destination: links[index].component) {
+                            Text(links[index].title).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        }
+                    }
+                }
             }
             .foregroundColor(.blue)
         }.navigationTitle("Home Page")
