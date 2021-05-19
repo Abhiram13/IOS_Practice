@@ -58,10 +58,12 @@ struct PercentageToValueView: View {
             Text("Find Value")
                 .bold()
                 .font(.system(size: 20))
+                .foregroundColor(.black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find how much value the percentage presents")
                 .font(.system(size: 15))
+                .foregroundColor(.black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Total Amount", text: $Total)
@@ -103,11 +105,13 @@ struct ValueToPercentageFormView: View {
         VStack(spacing: nil) {
             Text("Find Percentage")
                 .bold()
+                .foregroundColor(.black)
                 .font(.system(size: 20))
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find out how much percentage the value covers")
                 .font(.system(size: 15))
+                .foregroundColor(.black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Value", text: $Value)
@@ -157,6 +161,7 @@ struct Detail: View {
                 Text("Percentage Calculator")
                     .bold()
                     .frame(minHeight: 60)
+                    .foregroundColor(.black)
                     .font(.system(size: 25))
                 
                 PercentageCalculator(Width: screenWidth, Height: screenHeight);
