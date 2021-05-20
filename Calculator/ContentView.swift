@@ -20,11 +20,9 @@ struct ContentView: View {
     var body : some View {
         NavigationView {
             VStack (alignment: .leading, spacing: 10) {
-                List {
-                    ForEach(0..<links.count) { index in
-                        NavigationLink(destination: links[index].component) {
-                            Text(links[index].title).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        }
+                ForEach(0..<links.count) { index in
+                    NavigationLink(destination: links[index].component) {
+                        Text(links[index].title).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     }
                 }
             }
