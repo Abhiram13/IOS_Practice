@@ -14,7 +14,7 @@ struct Links {
 struct ContentView: View {
     let links: [Links] = [
             Links(Title: "Pecentage Calculator", Component: AnyView(Detail())),
-            Links(Title: "Second Page", Component: AnyView(SecondPage()))
+            Links(Title: "Number Convertor", Component: AnyView(NumberConvertor()))
         ];
     
     var body : some View {
