@@ -43,6 +43,7 @@ struct Buton<AlertType>: View {
 }
 
 struct PercentageToValueView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var showsAlert: Bool = false;
     @State private var Total: String = "";
     @State private var Percentage: String = "";
@@ -58,25 +59,25 @@ struct PercentageToValueView: View {
             Text("Find Value")
                 .bold()
                 .font(.system(size: 20))
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find how much value the percentage presents")
                 .font(.system(size: 15))
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Total Amount", text: $Total)
                 .keyboardType(.namePhonePad)
-                .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)                
+                .border((colorScheme == .dark ? Color.white : Color.black), width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
             TextField("Percentage %", text: $Percentage)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                .border((colorScheme == .dark ? Color.white : Color.black), width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
@@ -91,6 +92,7 @@ struct PercentageToValueView: View {
 }
 
 struct ValueToPercentageFormView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var showsAlert: Bool = false;
     @State private var Value: String = "";
     @State private var TotalAmount: String = "";
@@ -105,26 +107,26 @@ struct ValueToPercentageFormView: View {
         VStack(spacing: nil) {
             Text("Find Percentage")
                 .bold()
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .font(.system(size: 20))
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             Text("Find out how much percentage the value covers")
                 .font(.system(size: 15))
-                .foregroundColor(.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .frame(width: screenWidth - 50, height: 25, alignment: .leading)
             
             TextField("Value", text: $Value)
                 .keyboardType(.namePhonePad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                .border((colorScheme == .dark ? Color.white : Color.black), width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
 
             TextField("Total Amount", text: $TotalAmount)
                 .keyboardType(.asciiCapableNumberPad)
                 .frame(width: screenWidth - 50, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 1)
+                .border((colorScheme == .dark ? Color.white : Color.black), width: 1)
                 .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
             
